@@ -3,7 +3,7 @@ services:
   - type: web
     name: escalations-dashboard
     runtime: docker
-    plan: starter            # always-on (~$7/mo). "free" works but sleeps after 15 min idle (~1 min to wake)
+    plan: free            # always-on (~$7/mo). "free" works but sleeps after 15 min idle (~1 min to wake)
     healthCheckPath: /healthz
     autoDeploy: true
     envVars:
