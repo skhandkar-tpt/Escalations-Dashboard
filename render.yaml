@@ -1,0 +1,41 @@
+# Render Blueprint - New > Blueprint, pick this repo, and Render asks for the secret values.
+services:
+  - type: web
+    name: escalations-dashboard
+    runtime: docker
+    plan: starter            # always-on (~$7/mo). "free" works but sleeps after 15 min idle (~1 min to wake)
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      # ---- secrets: Render prompts for these; copy them from your local .env
+      - key: ZOHO_CLIENT_ID
+        sync: false
+      - key: ZOHO_CLIENT_SECRET
+        sync: false
+      - key: ZOHO_REFRESH_TOKEN
+        sync: false
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      # ---- settings
+      - key: REQUIRE_PASSWORD
+        value: "true"
+      - key: DASHBOARD_USER
+        value: escalations
+      - key: SDP_BASE_URL
+        value: https://sdpondemand.manageengine.com/app/itdesk
+      - key: ZOHO_ACCOUNTS_URL
+        value: https://accounts.zoho.com
+      - key: CRITICAL_PRIORITIES
+        value: "PSS-IN-P1 | CL 4 Hours,SSD-IN-P1 | CL 8 Hours,PSS-IN-P2 | CL 8 Hours,SSD-IN-P2 | CL 24 Hours,PSS-SR-P1 | CL 2 days,SSD-SR-P1 | CL 2 Days"
+      - key: LEVELS
+        value: "Tier 3 - Solutions Engineering,Tier 4 - Dev Team"
+      - key: CLOSED_STATUSES
+        value: "Closed,Resolved,Cancelled,Canceled,Unresolved"
+      - key: AT_RISK_HOURS
+        value: "4"
+      - key: STALE_HOURS
+        value: "24"
+      - key: REFRESH_SECONDS
+        value: "60"
+      - key: HOST
+        value: 0.0.0.0

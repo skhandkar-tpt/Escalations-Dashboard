@@ -1,0 +1,11 @@
+services:
+  escalations:
+    build: .
+    image: escalations-dashboard
+    env_file: .env          # secrets stay on the server, never baked into the image
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8787"
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
